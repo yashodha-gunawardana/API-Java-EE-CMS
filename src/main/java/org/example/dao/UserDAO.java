@@ -22,6 +22,16 @@ public class UserDAO {
             pstm.setString(3, role);
 
             ResultSet rs = pstm.executeQuery();
+
+            if (rs.next()) {
+                return new UserDTO(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("email"),
+                        rs.getString("password"),
+                        rs.getString("role")
+                );
+            }
         }
     }
 }
