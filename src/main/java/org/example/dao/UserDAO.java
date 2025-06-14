@@ -10,16 +10,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserDAO {
-    public static UserDTO findUser(ServletContext servletContext, String email, String password, String role) throws SQLException {
+    public static UserDTO findUser(ServletContext servletContext, String email, String password) throws SQLException {
 
         BasicDataSource dataSource = (BasicDataSource) servletContext.getAttribute("ds");
 
         try {
             Connection connection = dataSource.getConnection();
-            PreparedStatement pstm = connection.prepareStatement("SELECT * FROM user WHERE email = ? AND password = ? AND role = ?");
+            PreparedStatement pstm = connection.prepareStatement("SELECT * FROM user WHERE email = ? AND password = ?");
             pstm.setString(1, email);
             pstm.setString(2, password);
-            pstm.setString(3, role);
+//            pstm.setString(3, role);
 
             ResultSet rs = pstm.executeQuery();
 

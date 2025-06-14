@@ -265,14 +265,15 @@
         </div>
 
         <!-- Error Message -->
-        <div class="error-message">
+        <div class="error-message" style="display: <%= request.getAttribute("errorMessage") != null ? "block" : "none" %>;">
             <%= request.getAttribute("errorMessage") != null ? request.getAttribute("errorMessage") : "" %>
         </div>
 
-        <form method="post" action="login">
+
+        <form method="post" action="/login">
             <div class="form-group">
                 <label for="email">Email Address</label>
-                <input type="text" class="form-control" name="email" id="email" placeholder="example@123gmail.com" required>
+                <input type="email" class="form-control" name="email" id="email" placeholder="example@123gmail.com" required>
                 <div class="icon"><i class="far fa-envelope"></i></div>
             </div>
 
@@ -282,17 +283,17 @@
                 <div class="icon"><i class="fas fa-lock"></i></div>
             </div>
 
-            <div class="form-group">
-                <label for="role">User Role</label>
-                <select class="form-control" name="role" id="role" required>
-                    <option value="" disabled selected>Select your role</option>
-                    <option value="Employee">Employee</option>
-                    <option value="Admin">Admin</option>
-                </select>
-                <div class="icon"><i class="fas fa-user-tag"></i></div>
-            </div>
+<%--            <div class="form-group">--%>
+<%--                <label for="role">User Role</label>--%>
+<%--                <select class="form-control" name="role" id="role" required>--%>
+<%--                    <option value="" disabled selected>Select your role</option>--%>
+<%--                    <option value="Employee">Employee</option>--%>
+<%--                    <option value="Admin">Admin</option>--%>
+<%--                </select>--%>
+<%--                <div class="icon"><i class="fas fa-user-tag"></i></div>--%>
+<%--            </div>--%>
 
-            <button type="submit" class="btn">Login to Dashboard</button>
+            <button type="submit" class="btn">SignIn to Dashboard</button>
         </form>
 
         <div class="footer-links">

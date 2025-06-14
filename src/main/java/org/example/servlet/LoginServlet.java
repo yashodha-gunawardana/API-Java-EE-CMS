@@ -9,6 +9,7 @@ import org.example.dto.UserDTO;
 import org.example.model.UserModel;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
@@ -17,10 +18,15 @@ public class LoginServlet extends HttpServlet {
     protected void doPost (HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
-        String role = req.getParameter("userRole");
+//        String role = req.getParameter("userRole");
 
         ServletContext servletContext = getServletContext();
-        UserDTO user = UserModel.findUser(servletContext, email, password, role);
+        UserDTO user = null;
+        try {
+            user = UserModel.findUser(servletContext, email, password);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
         if (user == null) {
             resp.sendRedirect("Login.jsp?error= Invalid email or password");

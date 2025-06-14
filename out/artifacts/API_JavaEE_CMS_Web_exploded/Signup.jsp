@@ -1,15 +1,15 @@
 <%--
   Created by IntelliJ IDEA.
   User: Yashoda
-  Date: 6/13/2025
-  Time: 10:44 PM
+  Date: 6/14/2025
+  Time: 6:17 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <title> Login </title>
+    <title>Sign Up</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 
@@ -58,9 +58,9 @@
             100% { background-position: 0 0, 100px 150px, 300px 300px; }
         }
 
-        .login-container {
+        .signup-container {
             width: 100%;
-            max-width: 420px;
+            max-width: 450px;
             background: white;
             border-radius: 18px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
@@ -69,7 +69,7 @@
             z-index: 1;
         }
 
-        .login-container::before {
+        .signup-container::before {
             content: '';
             position: absolute;
             top: 0;
@@ -79,20 +79,20 @@
             background: linear-gradient(90deg, var(--primary), var(--accent));
         }
 
-        .login-content {
-            padding: 45px 40px 40px;
+        .signup-content {
+            padding: 40px 35px 35px;
         }
 
         .logo {
             text-align: center;
-            margin-bottom: 35px;
+            margin-bottom: 30px;
             position: relative;
         }
 
         .logo h1 {
             color: var(--primary);
             font-weight: 600;
-            font-size: 40px;
+            font-size: 36px;
             margin-bottom: 8px;
             letter-spacing: 0.7px;
         }
@@ -115,7 +115,7 @@
         }
 
         .form-group {
-            margin-bottom: 22px;
+            margin-bottom: 18px;
             position: relative;
         }
 
@@ -129,7 +129,7 @@
 
         .form-control {
             width: 100%;
-            padding: 14px 18px;
+            padding: 13px 16px;
             border: 1px solid #e9ecef;
             border-radius: 10px;
             font-size: 15px;
@@ -152,6 +152,15 @@
             top: 38px;
             color: var(--primary);
             font-size: 18px;
+        }
+
+        .name-fields {
+            display: flex;
+            gap: 15px;
+        }
+
+        .name-fields .form-group {
+            flex: 1;
         }
 
         .btn {
@@ -197,7 +206,7 @@
             padding: 14px;
             border-radius: 10px;
             font-size: 14px;
-            margin: 25px 0;
+            margin: 20px 0;
             text-align: center;
             display: <%= request.getAttribute("errorMessage") != null ? "block" : "none" %>;
             border: 1px solid #ffd6d6;
@@ -209,9 +218,40 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        .success-message {
+            color: #2e7d32;
+            background: #edf7ed;
+            padding: 14px;
+            border-radius: 10px;
+            font-size: 14px;
+            margin: 20px 0;
+            text-align: center;
+            display: <%= request.getAttribute("successMessage") != null ? "block" : "none" %>;
+            border: 1px solid #c8e6c9;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .terms {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+            font-size: 13px;
+            color: var(--accent);
+        }
+
+        .terms input {
+            margin-right: 10px;
+        }
+
+        .terms a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
         .footer-links {
             text-align: center;
-            margin-top: 30px;
+            margin-top: 25px;
             font-size: 14px;
             color: var(--primary);
             position: relative;
@@ -223,7 +263,7 @@
             width: 100%;
             height: 1px;
             background: linear-gradient(90deg, transparent, #e9ecef, transparent);
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         .footer-links a {
@@ -257,20 +297,32 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-<div class="login-container">
-    <div class="login-content">
+<div class="signup-container">
+    <div class="signup-content">
         <div class="logo">
-            <h1>Sign In</h1>
-            <p>Welcome back! Please enter your credentials to continue.</p>
+            <h1>Create Account</h1>
+            <p>Join us today! Fill in your details to get started.</p>
         </div>
 
         <!-- Error Message -->
-        <div class="error-message" style="display: <%= request.getAttribute("errorMessage") != null ? "block" : "none" %>;">
+        <div class="error-message">
             <%= request.getAttribute("errorMessage") != null ? request.getAttribute("errorMessage") : "" %>
         </div>
 
+        <!-- Success Message -->
+        <div class="success-message">
+            <%= request.getAttribute("successMessage") != null ? request.getAttribute("successMessage") : "" %>
+        </div>
 
-        <form method="post" action="/login">
+        <form method="post" action="register">
+            <div class="name-fields">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" name="name" id="name" placeholder="John" required>
+                    <div class="icon"><i class="fas fa-user"></i></div>
+                </div>
+            </div>
+
             <div class="form-group">
                 <label for="email">Email Address</label>
                 <input type="email" class="form-control" name="email" id="email" placeholder="example@123gmail.com" required>
@@ -283,26 +335,29 @@
                 <div class="icon"><i class="fas fa-lock"></i></div>
             </div>
 
-<%--            <div class="form-group">--%>
-<%--                <label for="role">User Role</label>--%>
-<%--                <select class="form-control" name="role" id="role" required>--%>
-<%--                    <option value="" disabled selected>Select your role</option>--%>
-<%--                    <option value="Employee">Employee</option>--%>
-<%--                    <option value="Admin">Admin</option>--%>
-<%--                </select>--%>
-<%--                <div class="icon"><i class="fas fa-user-tag"></i></div>--%>
+            <div class="form-group">
+                <label for="role">User Role</label>
+                <select class="form-control" name="role" id="role" required>
+                    <option value="" disabled selected>Select your role</option>
+                    <option value="Employee">Employee</option>
+                    <option value="Admin">Admin</option>
+                </select>
+                <div class="icon"><i class="fas fa-user-tag"></i></div>
+            </div>
+
+
+<%--            <div class="terms">--%>
+<%--                <input type="checkbox" id="terms" name="terms" required>--%>
+<%--                <label for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>--%>
 <%--            </div>--%>
 
-            <button type="submit" class="btn">SignIn to Dashboard</button>
+            <button type="submit" class="btn">Create Account</button>
         </form>
 
         <div class="footer-links">
-            Need an account? <a href="register">Request Access</a>
+            Already have an account? <a href="login">Sign In</a>
         </div>
     </div>
 </div>
 </body>
 </html>
-
-
-
