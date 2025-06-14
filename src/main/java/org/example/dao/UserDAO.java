@@ -4,6 +4,7 @@ import jakarta.servlet.ServletContext;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.example.dto.UserDTO;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 
 public class UserDAO {
@@ -11,4 +12,8 @@ public class UserDAO {
 
         BasicDataSource dataSource = (BasicDataSource) servletContext.getAttribute("ds");
 
+        try {
+            Connection connection = dataSource.getConnection();
+        }
+    }
 }
