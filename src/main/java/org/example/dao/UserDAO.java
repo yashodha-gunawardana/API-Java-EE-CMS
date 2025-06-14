@@ -16,6 +16,9 @@ public class UserDAO {
         try {
             Connection connection = dataSource.getConnection();
             PreparedStatement pstm = connection.prepareStatement("SELECT * FROM user WHERE email = ? AND password = ? AND role = ?");
+            pstm.setString(1, email);
+            pstm.setString(2, password);
+            pstm.setString(3, role);
         }
     }
 }
