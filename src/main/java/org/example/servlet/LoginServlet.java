@@ -24,7 +24,11 @@ public class LoginServlet extends HttpServlet {
 
         if (user == null) {
             resp.sendRedirect("Login.jsp?error= Invalid email or password");
+
+        } else if ("admin".equals(user.getRole())) {
+            resp.sendRedirect("Admin_dashboard.jsp?id=" + user.getId());
         }
+
     }
 
 }
