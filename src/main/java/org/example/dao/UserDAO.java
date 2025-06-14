@@ -5,6 +5,7 @@ import org.apache.commons.dbcp2.BasicDataSource;
 import org.example.dto.UserDTO;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class UserDAO {
@@ -14,6 +15,7 @@ public class UserDAO {
 
         try {
             Connection connection = dataSource.getConnection();
+            PreparedStatement pstm = connection.prepareStatement("SELECT * FROM user WHERE email = ? AND password = ? AND role = ?");
         }
     }
 }
