@@ -1,15 +1,15 @@
-package org.example.dto;
+package org.example.model;
 
 import lombok.*;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
 @Getter
 @Setter
 @ToString
 
-public class UserDTO {
+public class User {
     private int id;
     private String name;
     private String email;
