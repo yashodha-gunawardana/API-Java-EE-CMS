@@ -10,7 +10,9 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doGet (HttpServletRequest req, HttpServletResponse resp) {
-
+        String email = req.getParameter("email");
+        String password = req.getParameter("password");
+        String role = req.getParameter("userRole");
     }
 
 }
