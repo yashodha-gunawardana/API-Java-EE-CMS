@@ -6,6 +6,7 @@ import org.example.dto.UserDTO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserDAO {
@@ -19,6 +20,8 @@ public class UserDAO {
             pstm.setString(1, email);
             pstm.setString(2, password);
             pstm.setString(3, role);
+
+            ResultSet rs = pstm.executeQuery();
         }
     }
 }
