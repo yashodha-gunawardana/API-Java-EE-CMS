@@ -32,6 +32,9 @@ public class UserDAO {
                         rs.getString("role")
                 );
             }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
+        return null;
     }
 }
