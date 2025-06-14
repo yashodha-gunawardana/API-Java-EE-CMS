@@ -30,6 +30,9 @@ public class LoginServlet extends HttpServlet {
 
         } else if ("employee".equals(user.getRole())) {
             resp.sendRedirect("Employee_dashboard.jsp?id=" + user.getId());
+
+        } else {
+            resp.sendRedirect("Login.jsp?error= Invalid user role");
         }
 
     }
